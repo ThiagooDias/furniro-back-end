@@ -13,7 +13,7 @@ export class Category {
   @Column('text', { array: true })
   products: Product[];
 
-  @Column()
+  @Column({type: 'text'})
   imageLink: string;
 
   @Column()

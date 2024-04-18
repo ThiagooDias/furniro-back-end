@@ -1,5 +1,5 @@
 import { Category } from 'src/category/category.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -22,14 +22,14 @@ export class Product {
   @Column()
   largeDescription: string;
 
-  @Column()
+  @Column('decimal', { scale: 2})
   price: number;
 
-  @Column()
-  discountPrice: number;
+  @Column('decimal', { scale: 2, nullable: true })
+  discountPrice?: number
 
-  @Column()
-  discountPercent: number;
+  @Column({ nullable: true })
+  discountPercent?: number;
 
   @Column()
   isNew: boolean;
@@ -37,12 +37,12 @@ export class Product {
   @Column()
   imageLink: string;
 
-  @Column()
-  otherImagesLink: string;
+  @Column('text', { array: true })
+  otherImagesLink: string[];
 
-  @Column()
+  @CreateDateColumn()
   createdDate: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedDate: Date;
 }

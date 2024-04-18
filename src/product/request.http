@@ -1,0 +1,36 @@
+### Create a new product
+POST http://localhost:3000/product
+Content-Type: application/json
+
+{
+    "name": "UltraHD TV",
+    "sku": "UHD123456",
+    "categoryId": 1,
+    "description": "A high-definition television with 4K resolution.",
+    "largeDescription": "This UltraHD TV offers the latest in display technology with 4K resolution that provides sharper, crisper images with 4 times the detail of Full HD.",
+    "price": 1499.99,
+    "discountPercent": 10,
+    "isNew": true,
+    "imageLink": "http://example.com/images/product123.jpg",
+    "otherImagesLink": [
+        "http://example.com/images/product123_side.jpg",
+        "http://example.com/images/product123_back.jpg"
+    ]
+}
+
+### Get a product with a given ID
+GET http://localhost:3000/product/1
+
+### Get a product list with filters and pagination 
+GET http://localhost:3000/product?page=1&name=tv&isNew=true&maxPrice=1500
+
+### Update a product
+PATCH  http://localhost:3000/product/1
+Content-Type: application/json
+
+{
+    "name": "meskkk"
+}
+
+### Delete a product
+DELETE http://localhost:3000/product/10
