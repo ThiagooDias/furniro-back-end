@@ -8,7 +8,7 @@ Content-Type: application/json
     "categoryId": 1,
     "description": "A high-definition television with 4K resolution.",
     "largeDescription": "This UltraHD TV offers the latest in display technology with 4K resolution that provides sharper, crisper images with 4 times the detail of Full HD.",
-    "price": 1499.99,
+    "price": 2000,
     "discountPercent": 10,
     "isNew": true,
     "imageLink": "http://example.com/images/product123.jpg",
@@ -22,7 +22,7 @@ Content-Type: application/json
 GET http://localhost:3000/product/1
 
 ### Get a product list with filters and pagination 
-GET http://localhost:3000/product?page=1&name=tv&isNew=true&maxPrice=1500
+GET http://localhost:3000/product?page=1&sortBy=name&sortDirection=ASC
 
 ### Update a product
 PATCH  http://localhost:3000/product/1

@@ -16,7 +16,7 @@ export class ProductService {
     const product = this.repo.create(productDto);
 
     if (product.discountPercent) {
-      product.discountPrice = (product.price * product.discountPercent) / 100;
+      product.discountPrice = product.price - (product.price * product.discountPercent) / 100;
       product.discountPrice = truncateToTwoDecimalPlaces(product.discountPrice);
     }
 
@@ -31,7 +31,7 @@ export class ProductService {
   }
 
   async find(page: number, limit: number, queryFilters: any) {
-    const { name, category, isNew, maxPrice } = queryFilters;
+    const { name, category, isNew, maxPrice, sortBy, sortDirection } = queryFilters;
     const offset = (page - 1) * limit;
 
     let query = this.repo.createQueryBuilder('product');
@@ -56,6 +56,14 @@ export class ProductService {
     if (maxPrice !== undefined) {
       query = query.andWhere('product.price <= :maxPrice', { maxPrice });
     }
+
+    if (sortBy && sortDirection) {
+      if (['name', 'price'].includes(sortBy.toLowerCase())) {
+          const direction = sortDirection.toUpperCase() === 'ASC' ? 'ASC' : 'DESC';
+          query = query.orderBy(`product.${sortBy}`, direction);
+      }
+  }
+  
 
     query = query.skip(offset).take(limit);
 

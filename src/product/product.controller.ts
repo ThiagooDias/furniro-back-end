@@ -7,7 +7,6 @@ import {
   Patch,
   Post,
   Query,
-
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -33,17 +32,20 @@ export class ProductController {
     @Query('category') category: string,
     @Query('isNew') isNew: string,
     @Query('maxPrice') maxPrice: string,
+    @Query('sortBy') sortBy: string, 
+    @Query('sortDirection') sortDirection: string, 
   ) {
     const pageNumber = parseInt(page) || 1;
     const limitNumber = parseInt(limit) || 16;
-    const isNewBoolean = isNew.toLowerCase() === 'true';
+    const isNewBoolean = isNew ? isNew.toLowerCase() === 'true' : undefined;
     const maxPriceNumber = parseFloat(maxPrice);
-
     const queryFilters = {
       name,
       category: parseInt(category),
       isNew: isNewBoolean,
-      maxPrice: maxPriceNumber
+      maxPrice: maxPriceNumber,
+      sortBy, 
+      sortDirection, 
     };
 
     return this.productService.find(pageNumber, limitNumber, queryFilters);
@@ -56,13 +58,13 @@ export class ProductController {
 
   @Patch('/:id')
   updateProduct(@Param('id') id: string, @Body() body: UpdateProductDto) {
-    return this.productService.update(parseInt(id), body)
+    return this.productService.update(parseInt(id), body);
   }
 
   @Delete('/:id')
   deleteProduct(@Param('id') id: string) {
     console.log(parseInt(id));
-    
-    return this.productService.remove(parseInt(id))
+
+    return this.productService.remove(parseInt(id));
   }
 }
