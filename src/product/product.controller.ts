@@ -19,6 +19,11 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @Post()
+  createProduct(@Body() body: CreateProductDto) {
+    return this.productService.create(body);
+  }
+
   @Get('/:id')
   getProduct(@Param('id') id: string) {
     return this.productService.findOne(parseInt(id));
@@ -32,8 +37,8 @@ export class ProductController {
     @Query('category') category: string,
     @Query('isNew') isNew: string,
     @Query('maxPrice') maxPrice: string,
-    @Query('sortBy') sortBy: string, 
-    @Query('sortDirection') sortDirection: string, 
+    @Query('sortBy') sortBy: string,
+    @Query('sortDirection') sortDirection: string,
   ) {
     const pageNumber = parseInt(page) || 1;
     const limitNumber = parseInt(limit) || 16;
@@ -44,16 +49,11 @@ export class ProductController {
       category: parseInt(category),
       isNew: isNewBoolean,
       maxPrice: maxPriceNumber,
-      sortBy, 
-      sortDirection, 
+      sortBy,
+      sortDirection,
     };
 
     return this.productService.find(pageNumber, limitNumber, queryFilters);
-  }
-
-  @Post()
-  createProduct(@Body() productDto: CreateProductDto) {
-    return this.productService.create(productDto);
   }
 
   @Patch('/:id')

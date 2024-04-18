@@ -1,5 +1,5 @@
 import { Product } from 'src/product/product.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Category {
@@ -10,15 +10,14 @@ export class Category {
   name: string;
 
   @OneToMany(() => Product, (product) => product.categoryId)
-  @Column('text', { array: true })
   products: Product[];
 
-  @Column({type: 'text'})
+  @Column({nullable: true}) //TODO: remover nullable
   imageLink: string;
 
-  @Column()
+  @CreateDateColumn()
   createdDate: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedDate: Date;
 }

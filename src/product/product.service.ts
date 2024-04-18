@@ -81,9 +81,7 @@ export class ProductService {
   }
 
   async remove(id: number) {
-    const product = await this.findOne(id);
-    console.log(product, id);
-    
+    const product = await this.findOne(id);  
     if (!product) {
       throw new NotFoundException('Product not found!');
     }

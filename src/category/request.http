@@ -1,0 +1,25 @@
+### Create a new category
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "quarto",
+  "imageLink": "https://asdasdasdasd.png"
+}
+
+### Get all categories
+GET http://localhost:3000/category
+
+### Get a category a given ID
+GET http://localhost:3000/category/1
+
+### Get a category a given ID
+PATCH  http://localhost:3000/category/3
+Content-Type: application/json
+
+{
+  "name": "jogos"
+}
+
+### Delete a category a given ID
+DELETE  http://localhost:3000/category/4
