@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './product/product.entity';
 import { Category } from './category/category.entity';
 import { APP_PIPE } from '@nestjs/core';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
@@ -14,11 +16,11 @@ import { APP_PIPE } from '@nestjs/core';
     CategoryModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'kesavan.db.elephantsql.com',
-      port: 5432,
-      username: 'jhvgpwyc',
-      password: 'Ta9iMG01oPjtqu-QVfR9-J9VY-9lcRij',
-      database: 'jhvgpwyc',
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT, 
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
       entities: [Product, Category],
       synchronize: true,
     }),
