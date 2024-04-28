@@ -25,7 +25,6 @@ export class CreateProductDto {
   @IsNumber()
   price: number;
 
-  @IsOptional()
   @IsNumber()
   discountPercent: number;
 

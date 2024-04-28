@@ -24,7 +24,7 @@ export class ProductDto {
 
   @Expose()
   @Transform(({ value }) => parseFloat(value))
-  oldPrice: number;
+  currentPrice: number;
 
   @Expose()
   discountPercent: number;

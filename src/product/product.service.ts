@@ -26,7 +26,7 @@ export class ProductService {
     const product = this.repo.create(productDto);
 
     if (product.discountPercent) {
-      product.currentPrice = (product.price * product.discountPercent) / 100;
+      product.currentPrice = product.price - (product.price * product.discountPercent) / 100;
 
       product.currentPrice = truncateToTwoDecimalPlaces(product.currentPrice);
     } else {
@@ -72,7 +72,7 @@ export class ProductService {
     }
 
     if (withDiscount) {
-      query = query.andWhere('product.discountPercent IS NOT NULL');
+      query = query.andWhere('product.discountPercent != 0');
     }
 
     if (maxPrice !== undefined) {
@@ -91,8 +91,12 @@ export class ProductService {
 
     const [products, total] = await query.getManyAndCount();
 
-    const endIndex = page * limit;
+    let endIndex = page * limit;
     const startIndex = endIndex - limit + 1;
+
+    endIndex > total ? endIndex = total : endIndex
+    console.log(total, endIndex);
+    
 
     return { results: total, startIndex, endIndex, products };
   }

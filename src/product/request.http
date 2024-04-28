@@ -22,7 +22,7 @@ Content-Type: application/json
 GET http://localhost:3001/product/1
 
 ### Get a product list with filters and pagination 
-GET http://localhost:3001/product?page=2
+GET http://localhost:3001/product?withDiscount=true
 
 ### Update a product
 PATCH  http://localhost:3000/product/1
