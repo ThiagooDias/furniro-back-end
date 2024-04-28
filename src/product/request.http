@@ -19,10 +19,10 @@ Content-Type: application/json
 }
 
 ### Get a product with a given ID
-GET http://localhost:3000/product/1
+GET http://localhost:3001/product/1
 
 ### Get a product list with filters and pagination 
-GET http://localhost:3000/product?page=1&sortBy=name&sortDirection=ASC
+GET http://localhost:3001/product?page=2
 
 ### Update a product
 PATCH  http://localhost:3000/product/1

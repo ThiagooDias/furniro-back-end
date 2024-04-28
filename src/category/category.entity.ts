@@ -12,7 +12,7 @@ export class Category {
   @OneToMany(() => Product, (product) => product.categoryId)
   products: Product[];
 
-  @Column({nullable: true}) //TODO: remover nullable
+  @Column() 
   imageLink: string;
 
   @CreateDateColumn()

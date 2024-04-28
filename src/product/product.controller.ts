@@ -14,7 +14,8 @@ import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { ProductDto } from './dto/product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
-@Serialize(ProductDto)
+
+// @Serialize(ProductDto)
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
@@ -30,7 +31,7 @@ export class ProductController {
   }
 
   @Get()
-  getProductsList(
+   getProductsList(
     @Query('page') page: string,
     @Query('limit') limit: string,
     @Query('name') name: string,
@@ -39,20 +40,25 @@ export class ProductController {
     @Query('maxPrice') maxPrice: string,
     @Query('sortBy') sortBy: string,
     @Query('sortDirection') sortDirection: string,
+    @Query('withDiscount') withDiscount: string,
   ) {
     const pageNumber = parseInt(page) || 1;
     const limitNumber = parseInt(limit) || 16;
     const isNewBoolean = isNew ? isNew.toLowerCase() === 'true' : undefined;
+    const whithDiscountBoolean = withDiscount
+      ? withDiscount.toLowerCase() === 'true'
+      : undefined;
     const maxPriceNumber = parseFloat(maxPrice);
     const queryFilters = {
       name,
       category: parseInt(category),
       isNew: isNewBoolean,
+      withDiscount: whithDiscountBoolean,
       maxPrice: maxPriceNumber,
       sortBy,
       sortDirection,
     };
-
+    
     return this.productService.find(pageNumber, limitNumber, queryFilters);
   }
 

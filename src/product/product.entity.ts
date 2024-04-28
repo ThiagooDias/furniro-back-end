@@ -25,6 +25,9 @@ export class Product {
   @Column('decimal', { scale: 2})
   price: number;
 
+  @Column('decimal', { scale: 2})
+  currentPrice: number;
+
   @Column('decimal', { scale: 2, nullable: true })
   discountPrice?: number
 
